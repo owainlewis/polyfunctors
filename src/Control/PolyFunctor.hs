@@ -38,9 +38,7 @@ instance TriFunctor (,,) where
     trimap f g h (x, y, z) = ((f x), (g y), (h z))
     {-# INLINE trimap #-}
 
-mapTri
-  :: TriFunctor f =>
-     (a -> x) -> (b -> y) -> (c -> z) -> [f a b c] -> [f x y z]
+mapTri :: TriFunctor f => (a -> x) -> (b -> y) -> (c -> z) -> [f a b c] -> [f x y z]
 mapTri f g h = map $ trimap f g h
 
 instance TriFunctor Tri where
@@ -74,3 +72,13 @@ instance QuadFunctor Quad where
     quadmap _ _ h _ (QuadC c) = QuadC (h c)
     quadmap _ _ _ i (QuadD d) = QuadD (i d)
     {-# INLINE quadmap #-}
+
+mapQuad
+  :: QuadFunctor f =>
+     (a -> a')
+     -> (b -> b')
+     -> (c -> c')
+     -> (d -> d')
+     -> [f a b c d]
+     -> [f a' b' c' d']
+mapQuad f g h i = map $ quadmap f g h i
