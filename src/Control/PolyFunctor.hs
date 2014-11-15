@@ -38,6 +38,11 @@ instance TriFunctor (,,) where
     trimap f g h (x, y, z) = ((f x), (g y), (h z))
     {-# INLINE trimap #-}
 
+mapTri
+  :: TriFunctor f =>
+     (a -> x) -> (b -> y) -> (c -> z) -> [f a b c] -> [f x y z]
+mapTri f g h = map $ trimap f g h
+
 instance TriFunctor Tri where
     trimap f _ _ (TriA x) = TriA (f x)
     trimap _ g _ (TriB y) = TriB (g y)
