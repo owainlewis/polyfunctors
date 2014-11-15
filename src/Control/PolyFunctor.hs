@@ -74,8 +74,8 @@ instance QuadFunctor Quad where
     {-# INLINE quadmap #-}
 
 mapQuad
-  :: QuadFunctor f =>
-     (a -> a')
+  :: QuadFunctor f => 
+        (a -> a')
      -> (b -> b')
      -> (c -> c')
      -> (d -> d')
