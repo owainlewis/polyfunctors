@@ -20,6 +20,18 @@ module Control.PolyFunctor
   , Quad(..)
   ) where
 
+class BiFunctor f where
+    bimap :: (a -> c) -> (b -> d) -> f a b -> f c d
+
+instance BiFunctor Either where
+    bimap f _ (Left a)  = Left (f a)
+    bimap _ g (Right a) = Right (g a)
+    {-# INLINE bimap #-}
+
+instance BiFunctor (,) where
+    bimap f g (a, b) = (f a, g b)
+    {-# INLINE bimap #-}
+    
 -----------------------------------------------------------------------------
 -- TriFunctor
 
