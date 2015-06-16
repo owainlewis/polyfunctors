@@ -20,8 +20,7 @@ module Control.PolyFunctor
   , Quad(..)
   ) where
 
-class BiFunctor f where
-    bimap :: (a -> c) -> (b -> d) -> f a b -> f c d
+class BiFunctor f where bimap :: (a -> c) -> (b -> d) -> f a b -> f c d
 
 instance BiFunctor Either where
     bimap f _ (Left a)  = Left (f a)
@@ -31,9 +30,6 @@ instance BiFunctor Either where
 instance BiFunctor (,) where
     bimap f g (a, b) = (f a, g b)
     {-# INLINE bimap #-}
-    
------------------------------------------------------------------------------
--- TriFunctor
 
 class TriFunctor f where
   trimap :: (a -> x) ->
@@ -49,6 +45,8 @@ data Tri a b c =
 instance TriFunctor (,,) where
     trimap f g h (x, y, z) = ((f x), (g y), (h z))
     {-# INLINE trimap #-}
+    
+-- TODO Maybe[Either] => Three branches
 
 mapTri :: TriFunctor f => (a -> x) -> (b -> y) -> (c -> z) -> [f a b c] -> [f x y z]
 mapTri f g h = map $ trimap f g h
@@ -59,8 +57,7 @@ instance TriFunctor Tri where
     trimap _ _ h (TriC z) = TriC (h z)
     {-# INLINE trimap #-}
 
------------------------------------------------------------------------------
--- Quad Functor
+-- | Quad Functor
 data Quad a b c d =
     QuadA a
   | QuadB b
