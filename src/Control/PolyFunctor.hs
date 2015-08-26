@@ -14,7 +14,8 @@
 -----------------------------------------------------------------------------
 
 module Control.PolyFunctor
-  ( TriFunctor(..)
+  ( BiFunctor(..)
+  , TriFunctor(..)
   , QuadFunctor(..)
   , Tri(..)
   , Quad(..)
