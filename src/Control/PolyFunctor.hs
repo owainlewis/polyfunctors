@@ -1,17 +1,4 @@
 {-# LANGUAGE TypeOperators #-}
------------------------------------------------------------------------------
--- |
--- Module      :  Control.PolyFunctor
--- Copyright   :  2014 Owain Lewis
--- License     :  public domain
---
--- Maintainer  :  owain@owainlewis.com
--- Stability   :  experimental
--- Portability :  portable
---
--- A collection of experimental polyfunctor instances you probably don't need
---
------------------------------------------------------------------------------
 
 module Control.PolyFunctor
   ( BiFunctor(..)
