@@ -1,5 +1,4 @@
 {-# LANGUAGE TypeOperators #-}
-
 module Control.PolyFunctor
   ( BiFunctor(..)
   , TriFunctor(..)
@@ -33,8 +32,6 @@ data Tri a b c =
 instance TriFunctor (,,) where
     trimap f g h (x, y, z) = ((f x), (g y), (h z))
     {-# INLINE trimap #-}
-    
--- TODO Maybe[Either] => Three branches
 
 mapTri :: TriFunctor f => (a -> x) -> (b -> y) -> (c -> z) -> [f a b c] -> [f x y z]
 mapTri f g h = map $ trimap f g h
