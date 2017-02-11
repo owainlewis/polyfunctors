@@ -5,9 +5,30 @@ module Control.PolyFunctor
   , QuadFunctor(..)
   , Tri(..)
   , Quad(..)
+  , CovariantFunctor
+  , ContravariantFunctor
+  , Profunctor
   ) where
 
-class BiFunctor f where bimap :: (a -> c) -> (b -> d) -> f a b -> f c d
+-----------------------------------------------------
+
+class CovariantFunctor f where
+    fmap :: (a -> b) -> f a -> f b
+
+-----------------------------------------------------
+
+class ContravariantFunctor f where
+    contramap :: (b -> a) -> f a -> f b
+
+-----------------------------------------------------
+
+class Profunctor f where
+    dimap :: (c -> a) -> (b -> d) -> f a b -> f c d
+
+-----------------------------------------------------
+
+class BiFunctor f where
+    bimap :: (a -> c) -> (b -> d) -> f a b -> f c d
 
 instance BiFunctor Either where
     bimap f _ (Left a)  = Left (f a)
@@ -17,6 +38,8 @@ instance BiFunctor Either where
 instance BiFunctor (,) where
     bimap f g (a, b) = (f a, g b)
     {-# INLINE bimap #-}
+
+-----------------------------------------------------
 
 class TriFunctor f where
   trimap :: (a -> x) ->
@@ -49,6 +72,8 @@ data Quad a b c d =
   | QuadC c
   | QuadD d
 
+-----------------------------------------------------
+
 class QuadFunctor f where
     quadmap :: (a -> a') ->
                (b -> b') ->
@@ -68,7 +93,7 @@ instance QuadFunctor Quad where
     {-# INLINE quadmap #-}
 
 mapQuad
-  :: QuadFunctor f => 
+  :: QuadFunctor f =>
         (a -> a')
      -> (b -> b')
      -> (c -> c')
