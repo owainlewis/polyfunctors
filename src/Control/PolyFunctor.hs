@@ -1,4 +1,4 @@
--- |
+-- | ---------------------------------------------
 -- Module      : Control.PolyFunctor
 --
 -- Copyright   : (c) 2016 Owain Lewis
@@ -7,7 +7,7 @@
 -- Maintainer  : Owain Lewis <owain@owainlewis.com>
 -- Stability   : experimental
 -- Portability : GHC
---
+-- | ---------------------------------------------
 {-# LANGUAGE TypeOperators #-}
 module Control.PolyFunctor
   ( BiFunctor(..)
@@ -29,8 +29,6 @@ class ContravariantFunctor f where
 class Profunctor f where
     dimap :: (c -> a) -> (b -> d) -> f a b -> f c d
 
------------------------------------------------------
-
 class BiFunctor f where
     bimap :: (a -> c) -> (b -> d) -> f a b -> f c d
 
@@ -42,8 +40,6 @@ instance BiFunctor Either where
 instance BiFunctor (,) where
     bimap f g (a, b) = (f a, g b)
     {-# INLINE bimap #-}
-
------------------------------------------------------
 
 class TriFunctor f where
   trimap :: (a -> x) ->
@@ -68,9 +64,7 @@ instance TriFunctor Tri where
     trimap _ g _ (TriB y) = TriB (g y)
     trimap _ _ h (TriC z) = TriC (h z)
     {-# INLINE trimap #-}
-
------------------------------------------------------
-
+    
 data Quad a b c d =
     QuadA a
   | QuadB b
