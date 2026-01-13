@@ -2,6 +2,25 @@
 
 Functor-like type classes for multi-parameter types in Haskell.
 
+## What are PolyFunctors?
+
+Haskell's standard `Functor` only works with types that have one type parameter (like `Maybe a` or `[a]`). But what about types with multiple parameters like `Either a b` or `(a, b, c)`?
+
+PolyFunctors generalize the functor pattern to these multi-parameter types:
+
+- **BiFunctor** lets you map over both sides of `Either` or a 2-tuple
+- **TriFunctor** extends this to 3-tuples
+- **QuadFunctor** / **PentaFunctor** go even further
+
+This library also provides the corresponding `Foldable` and `Traversable` variants, plus utilities like `Swap`, `Rotate3`, and `Validation` (an `Either` that accumulates errors).
+
+## Why use this?
+
+- **Transform tuples uniformly** — apply different functions to each position in one call
+- **Work with sum types** — `Tri`, `Quad`, `Penta` are n-way alternatives to `Either`
+- **Accumulate validation errors** — `Validation` collects all failures instead of short-circuiting
+- **Compose functions flexibly** — `Profunctor` lets you map over both input and output
+
 ## Installation
 
 ```cabal
